@@ -1,11 +1,13 @@
 import React from "react"
-import PropTypes from "prop-types"
+
 class Upload extends React.Component {
   render () {
     return (
-      <React.Fragment>
-        <h1>Hello, world!</h1>
-      </React.Fragment>
+      <>
+        <div className="upload-container">
+          <h1>Hello, world!</h1>
+        </div>
+      </>
     );
   }
 }
