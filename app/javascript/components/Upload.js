@@ -7,7 +7,10 @@ class Upload extends React.Component {
       <React.Fragment>
         <div className="upload-container">
           <div>
-            <Icons.Upload />
+            <Icons.Upload size={128} strokeWidth={0.4} />
+            <div>
+              <a className="upload-link">Upload image</a>
+            </div>
           </div>
         </div>
       </React.Fragment>
