@@ -36,7 +36,12 @@ html, body {
   text-align: center;
 }
 
-.upload-link {
+.upload-btn:hover {
+  color: #07adfa;
+  cursor: pointer;
+}
+
+.upload-text {
   font-family: "Open Sans";
   font-size: 22px;
 }
