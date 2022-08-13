@@ -63,3 +63,4 @@ gem 'webpacker'
 gem 'react-rails'
 
 gem 'data_uri'
+gem "aws-sdk-s3", require: false
