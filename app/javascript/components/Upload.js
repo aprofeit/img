@@ -1,21 +1,49 @@
-import React from "react"
+import React, { useState } from "react"
 import * as Icons from "react-feather"
+import { useFilePicker } from "use-file-picker";
+import axios from 'axios';
 
-class Upload extends React.Component {
-  render () {
-    return (
-      <React.Fragment>
-        <div className="upload-container">
-          <div>
-            <Icons.Upload size={128} strokeWidth={0.4} />
-            <div>
-              <a className="upload-link">Upload image</a>
-            </div>
-          </div>
-        </div>
-      </React.Fragment>
-    );
-  }
+function uploadFile({name, content}) {
+  axios.post('/uploads', {
+    upload: {
+      name: name,
+      content: content
+    }}, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((data) => console.log(data))
 }
 
-export default Upload
+export default function Upload() {
+  const [uploading, setUploading] = useState(false);
+
+  const [openFilePicker, { filesContent }] = useFilePicker({
+    accept: "image/*",
+    maxFileSize: 20,
+    multiple: false,
+    readAs: "DataURL",
+  });
+
+  if (filesContent.length === 1) {
+    uploadFile(filesContent[0]);
+  }
+
+  const uploadOnClick = () => {
+    setUploading(true);
+    openFilePicker();
+  }
+
+  return (
+    <React.Fragment>
+      <div className="upload-container">
+        <div className="upload-btn" onClick={() => uploadOnClick()}>
+          <Icons.Upload size={128} strokeWidth={0.4} />
+          <div>
+            <span className="upload-text">{ uploading ? "Uploading..." : "Upload image" }</span>
+          </div>
+        </div>
+      </div>
+    </React.Fragment>
+  )
+}
