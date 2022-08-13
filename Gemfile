@@ -61,3 +61,5 @@ end
 
 gem 'webpacker'
 gem 'react-rails'
+
+gem 'data_uri'

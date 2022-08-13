@@ -1,6 +1,19 @@
 import React, { useState } from "react"
 import * as Icons from "react-feather"
 import { useFilePicker } from "use-file-picker";
+import axios from 'axios';
+
+function uploadFile({name, content}) {
+  axios.post('/uploads', {
+    upload: {
+      name: name,
+      content: content
+    }}, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((data) => console.log(data))
+}
 
 export default function Upload() {
   const [uploading, setUploading] = useState(false);
@@ -13,7 +26,7 @@ export default function Upload() {
   });
 
   if (filesContent.length === 1) {
-    console.log('got file');
+    uploadFile(filesContent[0]);
   }
 
   const uploadOnClick = () => {
