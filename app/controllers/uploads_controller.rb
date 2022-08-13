@@ -4,6 +4,10 @@ class UploadsController < ApplicationController
   def new
   end
 
+  def show
+    @upload = Upload.find_by!(token: params[:token])
+  end
+
   def create
     data = URI::Data.new(upload_params[:content])
     image_data = StringIO.new(data.data)
@@ -12,7 +16,7 @@ class UploadsController < ApplicationController
     upload.image.attach(io: image_data, filename: upload_params[:name], content_type: data.content_type)
     upload.save!
 
-    render json: { url: url_for(upload.image) }, status: :created
+    render json: { url: "/uploads/#{upload.token}" }, status: :created
   end
 
   private

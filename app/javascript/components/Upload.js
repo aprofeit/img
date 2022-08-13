@@ -1,6 +1,7 @@
 import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import * as Icons from "react-feather"
-import { useFilePicker } from "use-file-picker";
+import { useFilePicker } from "use-file-picker"
 import axios from 'axios';
 
 function uploadFile({name, content}) {
@@ -12,7 +13,7 @@ function uploadFile({name, content}) {
       headers: {
         'Content-Type': 'application/json'
       }
-    }).then((data) => console.log(data))
+    }).then(({data}) => window.location.href = data.url)
 }
 
 export default function Upload() {

@@ -1,7 +1,9 @@
 require "test_helper"
 
 class UploadTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'creating an upload creates a random token' do
+    upload = Upload.create!
+
+    assert_equal SecureRandom.hex.length, upload.token.length
+  end
 end
