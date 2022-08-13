@@ -5,9 +5,14 @@ class UploadsController < ApplicationController
   end
 
   def create
-    image_data = URI::Data.new(upload_params[:content])
+    data = URI::Data.new(upload_params[:content])
+    image_data = StringIO.new(data.data)
 
-    head :created
+    upload = Upload.new
+    upload.image.attach(io: image_data, filename: upload_params[:name], content_type: data.content_type)
+    upload.save!
+
+    render json: { url: url_for(upload.image) }, status: :created
   end
 
   private
