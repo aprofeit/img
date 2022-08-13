@@ -3,4 +3,7 @@
   <meta property="og:title" content="<%= @upload.image.filename.to_s %>">
   <meta property="og:image" content="<%= url_for(@upload.image) %>">
 <% end %>
-<%= image_tag(url_for(@upload.image)) %>
+
+<center>
+  <%= image_tag(@upload.image.variant(:medium), class: 'uploaded-image') %>
+</center>
